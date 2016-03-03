@@ -12,33 +12,46 @@ let centered;
 // Defaults
 common = {
   boxSizing: 'border-box',
-  flexWrap: 'wrap'
+  flexWrap: 'wrap',
+	'-webkit-box-sizing': 'border-box',
+	'-webkit-flex-wrap': 'wrap'
 };
 
 layout = assign({}, common, {
-  display: 'flex'
+  display: 'flex',
+	display: '-webkit-flex'
 });
 
 inline = assign({}, common, {
-  display: 'inline-flex'
+  display: 'inline-flex',
+	display: '-webkit-inline-flex'
 });
 
 flex = {
   flexGrow: 1,
   flexShrink: 1,
-  flexBasis: '0%'
+  flexBasis: '0%',
+	'-webkit-flex-grow': 1,
+	'-webkit-flex-shrink': 1,
+	'-webkit-flex-basis': '0%'
 };
 
 flexAuto = assign({}, flex, {
   flexGrow: 1,
   flexShrink: 1,
-  flexBasis: 'auto'
+  flexBasis: 'auto',
+	'-webkit-flex-grow': 1,
+	'-webkit-flex-shrink': 1,
+	'-webkit-flex-basis': 'auto'
 });
 
 flexNone = {
   flexGrow: 0,
   flexShrink: 0,
-  flexBasis: 'auto'
+  flexBasis: 'auto',
+	'-webkit-flex-grow': 0,
+	'-webkit-flex-shrink': 0,
+	'-webkit-flex-basis': '0%'
 };
 
 block = {
@@ -66,71 +79,88 @@ absolute = {
 };
 
 horizontal = assign({}, layout, {
-  flexDirection: 'row'
+  flexDirection: 'row',
+	'-webkit-flex-direction': 'row'
 });
 
 horizontalReverse = assign({}, layout, {
-  flexDirection: 'row-reverse'
+  flexDirection: 'row-reverse',
+	'-webkit-flex-direction': 'row-reverse'
 });
 
 vertical = assign({}, layout, {
-  flexDirection: 'column'
+  flexDirection: 'column',
+	'-webkit-flex-direction': 'column'
 });
 
 verticalReverse = assign({}, layout, {
-  flexDirection: 'column-reverse'
+  flexDirection: 'column-reverse',
+	'-webkit-flex-direction': 'column-reverse'
 });
 
 alignStart = {
-  alignItems: 'flex-start'
+  alignItems: 'flex-start',
+	'-webkit-align-items': 'flex-start'
 };
 
 alignCenter = {
-  alignItems: 'center'
+  alignItems: 'center',
+	'-webkit-align-items': 'center',
 };
 
 alignEnd = {
-  alignItems: 'flex-end'
+  alignItems: 'flex-end',
+	'-webkit-align-items': 'flex-end'
 };
 
 alignStretch = {
-  alignItems: 'stretch'
+  alignItems: 'stretch',
+	'-webkit-align-items': 'stretch',
 };
 
 selfAlignStart = {
-  alignSelf: 'flex-start'
+  alignSelf: 'flex-start',
+	'-webkit-align-self': 'flex-start'
 };
 
 selfAlignCenter = {
-  alignSelf: 'center'
+  alignSelf: 'center',
+	'-webkit-align-self': 'center'
 };
 
 selfAlignEnd = {
-  alignSelf: 'flex-end'
+  alignSelf: 'flex-end',
+	'-webkit-align-self': 'flex-end'
 };
 
 selfAlignStretch = {
-  alignSelf: 'stretch'
+  alignSelf: 'stretch',
+	'-webkit-align-self': 'stretch'
 };
 
 justifyStart = {
-  justifyContent: 'flex-start'
+  justifyContent: 'flex-start',
+	'-webkit-justify-content': 'flex-start'
 };
 
 justifyCenter = {
-  justifyContent: 'center'
+  justifyContent: 'center',
+	'-webkit-justify-content': 'center'
 };
 
 justifyEnd = {
-  justifyContent: 'flex-end'
+  justifyContent: 'flex-end',
+	'-webkit-justify-content': 'flex-end'
 };
 
 justifyBetween = {
-  justifyContent: 'space-between'
+  justifyContent: 'space-between',
+	'-webkit-justify-content': 'space-between'
 };
 
 justifyAround = {
-  justifyContent: 'space-around'
+  justifyContent: 'space-around',
+	'-webkit-justify-content': 'space-around'
 };
 
 centered = assign({}, layout, alignCenter, justifyCenter);
