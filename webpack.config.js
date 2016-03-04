@@ -74,7 +74,7 @@ function start() {
         {
           test: /\.less$/,
           exclude: /node_modules/,
-          loaders: ['style', 'css', 'less'],
+          loaders: ['style', 'css?modules&localIdentName=[name]__[local]__[hash:base64:5]', 'less'],
         },
       ]
     },
@@ -110,7 +110,12 @@ function build() {
           test: /\.js?$/,
           exclude: /node_modules/,
           loader: 'babel?stage=0',
-        }
+        },
+				{
+					test: /\.less$/,
+					exclude: /node_modules/,
+					loaders: ['style', 'css?modules&localIdentName=[name]__[local]__[hash:base64:5]', 'less']
+				}
       ]
     },
 
@@ -152,7 +157,7 @@ function deploy() {
         {
           test: /\.less$/,
           exclude: /node_modules/,
-          loaders: ['style', 'css', 'less']
+          loaders: ['style', 'css?modules&localIdentName=[name]__[local]__[hash:base64:5]', 'less']
         }
       ]
     },

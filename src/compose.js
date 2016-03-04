@@ -1,222 +1,149 @@
 import React from 'react';
 import assign from 'object-assign';
-import layout from './layout';
 
-const _mediaQueryListByQueryString = {};
-const _predefinedMediaQueryString = {
-  xs: 'screen and (min-width: 480px)',
-  sm: 'screen and (min-width: 768px)',
-  md: 'screen and (min-width: 992px)',
-  lg: 'screen and (min-width: 1200px)'
-};
+var styles = require('./layout.less');
 
 function _query(key) {
   return key[0] === '@' || key === 'xs' || key === 'md' || key === 'lg';
 };
 
-function _onMediaQueryChange(component, query, mediaQueryList) {
-  let media = {};
-  media[query] = mediaQueryList.matches;
-  _setStyleState(component, query, media);
-}
-
-function _setStyleState(component, key, newState) {
-  let existing = component.state && component.state._media || {};
-  let state = { _media: assign({}, existing) };
-  state._media[key] = state._media[key] || {};
-  assign(state._media[key], newState);
-  component.setState({
-    _media: state._media
-  });
-}
-
-function _resolveLayoutGeneral(props, style) {
-  let newStyle = {};
+function _resolveLayoutGeneral(props) {
+  let newClasses = [];
   if(props.block){
-    newStyle = assign(newStyle, style, layout.block);
+		newClasses.push(styles['block']);
   }
   if(props.hidden){
-    newStyle = assign(newStyle, style, layout.hidden);
+		newClasses.push(styles['hidden']);
   }
   if(props.invisible){
-    newStyle = assign(newStyle, style, layout.invisible);
+		newClasses.push(styles['invisible']);
   }
 
-  return newStyle;
+  return newClasses;
 }
 
-function _resolveLayoutPosition(props, style) {
-  let newStyle = {};
+function _resolveLayoutPosition(props) {
+	let newClasses = [];
   if(props.relative){
-    newStyle = assign(newStyle, style, layout.relative);
+    newClasses.push(styles['relative']);
   }
   if(props.absolute){
-    newStyle = assign(newStyle, style, layout.absolute);
+    newClasses.push(styles['absolute']);
   }
 
-  return newStyle;
+  return newClasses;
 };
 
-function _resolveLayoutFlex(props, style) {
-  let newStyle = {};
+function _resolveLayoutFlex(props) {
+
+
+	let newClasses = [];
   if(props.layout){
-    newStyle = assign(newStyle, style, layout.layout, layout.vertical);
+    newClasses.push(styles['layout']);
     if(props.vertical){
       props.reverse ?
-      newStyle = assign(newStyle, style, layout.verticalReverse) :
-      newStyle = assign(newStyle, style, layout.vertical);
+      newClasses.push(styles['verticalReverse']) :
+      newClasses.push(styles['vertical']);
     } else {
       props.reverse ?
-      newStyle = assign(newStyle, style, layout.horizontalReverse) :
-      newStyle = assign(newStyle, style, layout.horizontal);
+				newClasses.push(styles['horizontalReverse']) :
+				newClasses.push(styles['horizontal']);
     }
   }
   if(props.inline){
-    newStyle = assign(newStyle, style, layout.inline, layout.horizontal);
+		newClasses.push(styles['inline']);
+		newClasses.push(styles['horizontal']);
   }
 
   props.flex ?
-  newStyle = assign(newStyle, layout.flexAuto, style) :
-  newStyle = assign(newStyle, layout.flexNone, style);
+		newClasses.push(styles['flexAuto']):
+  	newClasses.push(styles['flexNone']);
 
-  return newStyle;
+  return newClasses;
 };
 
-function _resolveLayoutAlign(props, style) {
-  let newStyle = {};
-  newStyle = assign(newStyle, style, layout.alignStretch);
+function _resolveLayoutAlign(props) {
+  let newClasses = [];
+	newClasses.push(styles['alignStretch']);
   if(props.start) {
-    newStyle = assign(newStyle, style, layout.alignStart);
+		newClasses.push(styles['alignStart']);
   }
   if(props.center) {
-    newStyle = assign(newStyle, style, layout.alignCenter);
+		newClasses.push(styles['alignCenter']);
   }
   if(props.end) {
-    newStyle = assign(newStyle, style, layout.alignEnd);
+		newClasses.push(styles['alignEnd']);
   }
   if(props.centered){
-    newStyle = assign(newStyle, style, layout.centered);
+		newClasses.push(styles['centered']);
   }
 
-  return newStyle;
+  return newClasses;
 };
 
-function _resolveLayoutSelf(props, style) {
-  let newStyle = {};
+function _resolveLayoutSelf(props) {
+  let newClasses = [];
   if(props.selfStart) {
-    newStyle = assign(newStyle, style, layout.selfAlignStart);
+		newClasses.push(styles['selfAlignStart']);
   }
   if(props.selfCenter) {
-    newStyle = assign(newStyle, style, layout.selfAlignCenter);
+		newClasses.push(styles['selfAlignCenter']);
   }
   if(props.selfEnd) {
-    newStyle = assign(newStyle, style, layout.selfAlignEnd);
+		newClasses.push(styles['selfAlignEnd']);
   }
   if(props.selfStretch){
-    newStyle = assign(newStyle, style, layout.selfAlignStretch);
+		newClasses.push(styles['selfAlignStretch']);
   }
 
-  return newStyle;
+  return newClasses;
 };
 
-function _resolveLayoutJustify(props, style) {
-  let newStyle = {};
+function _resolveLayoutJustify(props) {
+  let newClasses = [];
   if(props.justifyStart) {
-    newStyle = assign(newStyle, style, layout.justifyStart);
+		newClasses.push(styles['justifyStart']);
   }
   if(props.justifyCenter) {
-    newStyle = assign(newStyle, style, layout.justifyCenter);
+		newClasses.push(styles['justifyCenter']);
   }
   if(props.justifyEnd) {
-    newStyle = assign(newStyle, style, layout.justifyEnd);
+		newClasses.push(styles['justifyEnd']);
   }
   if(props.justifyStretch) {
-    newStyle = assign(newStyle, style, layout.justifyStretch);
+		newClasses.push(styles['justifyStretch']);
   }
   if(props.justifyBetween) {
-    newStyle = assign(newStyle, style, layout.justifyBetween);
+		newClasses.push(styles['justifyBetween']);
   }
   if(props.justifyAround) {
-    newStyle = assign(newStyle, style, layout.justifyAround);
+		newClasses.push(styles['justifyAround']);
   }
 
-  return newStyle;
+  return newClasses;
 };
 
-function _resolveLayoutStyles(props, style) {
-  return assign(
-    {},
-    _resolveLayoutGeneral(props, style),
-    _resolveLayoutPosition(props, style),
-    _resolveLayoutFlex(props, style),
-    _resolveLayoutAlign(props, style),
-    _resolveLayoutSelf(props, style),
-    _resolveLayoutJustify(props, style)
-  );
-};
+function _resolveLayoutClasses(props) {
+	var classes = []
+	classes = classes.concat(_resolveLayoutGeneral(props));
+	classes = classes.concat(_resolveLayoutPosition(props));
+	classes = classes.concat(_resolveLayoutFlex(props));
+	classes = classes.concat(_resolveLayoutAlign(props));
+	classes = classes.concat(_resolveLayoutSelf(props));
+	classes = classes.concat(_resolveLayoutJustify(props));
 
-function _resolveMediaQueries(component, style) {
-  let newStyle = {};
-  if (style) {
-    Object.keys(style)
-      .filter(name => _query(name))
-      .map(query => {
-        let mql;
-        let mediaQueryStyles;
-
-        mediaQueryStyles = style[query];
-        query = query[0] === '@' ? query.replace('@media ', '') : _predefinedMediaQueryString[query];
-        mql = _mediaQueryListByQueryString[query];
-        if (!mql) {
-          _mediaQueryListByQueryString[query] = mql = window.matchMedia(query);
-        }
-
-        if (!component._mediaQueryListenersByQuery) {
-          component._mediaQueryListenersByQuery = {};
-        }
-
-        if (!component._mediaQueryListenersByQuery[query]) {
-          let listener = _onMediaQueryChange.bind(null, component, query);
-          mql.addListener(listener);
-          component._mediaQueryListenersByQuery[query] = {
-            remove() { mql.removeListener(listener) }
-          };
-        }
-
-        if (mql.matches) {
-          newStyle = assign({}, style[query], mediaQueryStyles);
-        }
-      });
-  }
-
-  return newStyle;
-};
+	return classes;
+}
 
 export default function Compose(component, rendered){
   let props = rendered.props;
-  let style = props.style;
+  let classes = props.className;
 
   let newProps = {};
-  let newStyle = {};
+	let newClass = [];
 
-  if(Array.isArray(style)) {
-    for(let i=0; i<style.length; i++) {
-      if (!style[i] || typeof(style[i]) !== 'object' || Array.isArray(style[i])){
-        console.warn('styles object should be an object');
-      }
-      newStyle = assign(newStyle, style[i]);
-    }
-  }
+	newClass = newClass.concat(_resolveLayoutClasses(props));
 
-  newStyle = assign(newStyle, _resolveLayoutStyles(props, style));
-  newStyle = assign(newStyle, _resolveMediaQueries(component, style));
-
-  Object.keys(newStyle).forEach(key => {
-    if (_query(key)) {
-      delete newStyle[key];
-    }
-  });
-
-  newProps = assign(newProps, {style: newStyle});
+  newProps = assign(newProps, {className: newClass.join(' ') + ' ' + styles.demo});
   return React.cloneElement(rendered, newProps);
 }

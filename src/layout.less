@@ -1,0 +1,148 @@
+.block {
+	display: block;
+}
+
+.hidden {
+	display: none;
+}
+
+.invisible {
+	visibility: hidden;
+}
+
+.relative {
+	position: relative;
+}
+
+.absolute {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+.common {
+	box-sizing: border-box;
+	flex-wrap: wrap;
+}
+
+.layout {
+	.common;
+	display: flex;
+}
+
+.inline {
+	.common;
+	display: inline-flex;
+}
+
+.flex {
+	flex-grow: 1;
+	flex-shrink: 1;
+	flex-basis: '0%';
+}
+
+.flexAuto {
+	.flex;
+	flex-grow: 1;
+	flex-shrink: 1;
+	flex-basis: auto;
+}
+
+.flexNone {
+	flex-grow: 0;
+	flex-shrink: 0;
+	flex-basis: auto;
+}
+
+.horizontal {
+	.layout;
+	flex-direction: row;
+}
+
+.horizontalReverse {
+	.layout;
+	flex-direction: row-reverse;
+};
+
+.vertical {
+	.layout;
+	flex-direction: column;
+}
+
+.verticalReverse {
+	.layout;
+	flex-direction: column-reverse;
+}
+
+.alignStretch {
+	align-items: stretch;
+}
+
+.alignStart {
+	align-items: flex-start;
+}
+
+.alignCenter {
+	align-items: center;
+}
+
+.alignEnd {
+	align-items: flex-end;
+}
+
+.selfAlignStart {
+	align-self: flex-start;
+}
+
+.selfAlignCenter {
+	align-self: center;
+}
+
+.selfAlignEnd {
+	align-self: flex-end;
+}
+
+.selfAlignStretch {
+	align-self: stretch;
+}
+
+.justifyStart {
+	justify-content: flex-start;
+}
+
+.justifyCenter {
+	justify-content: center;
+}
+
+.justifyEnd {
+	justify-content: flex-end;
+};
+
+.justifyBetween {
+	justify-content: space-between;
+}
+
+.justifyAround {
+	justify-content: space-around;
+}
+
+.centered {
+	.layout;
+	.alignCenter;
+	.justifyCenter;
+}
+
+.demo {
+	margin: 20px 0;
+	padding: 4px;
+	background: #f5f5f5;
+}
+
+.demo>div {
+	margin: 4px;
+	padding: 12px;
+	background: #fff;
+}
+

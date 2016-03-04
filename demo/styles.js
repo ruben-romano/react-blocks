@@ -14,7 +14,9 @@ export default {
 
   header: {
     block: {
-      marginBottom: 40
+      marginBottom: 40,
+			width: 800,
+			textAign: 'center'
     },
     h1: {
       fontSize: 32,

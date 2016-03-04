@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import assign from 'object-assign';
+
 class Block extends Component {
   constructor(props, context) {
     super(props, context);
